@@ -1,6 +1,12 @@
 /*
  * Create a list that holds all of your cards
  */
+const listCards = document.querySelectorAll('.fa');
+ cardArray = Array.from(listCards);
+let shuffleCards  = shuffle(cardArray.slice(3,cardArray.length-1));
+
+document.querySelectorAll('.fa').forEach(function(cv){cv.remove(), this});
+
 
 
 /*
@@ -9,6 +15,14 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+const listAddCard = document.querySelectorAll('.card');
+
+for(i=0; i<listAddCard.length; i++){
+	
+	listAddCard.item(i).appendChild(shuffleCards[i]);
+
+}
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
