@@ -19,19 +19,66 @@ listCards.forEach(function(cv,ci){
  *   - add each card's HTML to the page
  */
 const listAddCard = document.querySelectorAll('.card');
+const moveElem = document.querySelector('.moves');
 
 for(i=0; i<listAddCard.length; i++){
 	
 	listAddCard.item(i).appendChild(shuffleCards[i]);
     if(i>0){
         if(shuffleCards[i].classList.value === shuffleCards[0].classList.value){
-            console.log('i is' + shuffleCards[i].innerHTML + 'and 0 is' + shuffleCards[0].innerHTML)
             listAddCard.item(i).classList.add('match');
-            
-
         }
     }
     else listAddCard.item(i).classList.add('match'); 
+}
+let turnCheck = 0;
+let cardChecker = '';
+let prevCard = '';
+let moves = 3;
+
+let matchCheck = function(evtObj){
+  console.log(turnCheck);
+     if(turnCheck==1){
+        if(evtObj.target.innerHTML===cardChecker){
+            evtObj.target.classList.add('match');
+            prevCard.classList.add('match');
+        }
+        else{
+            console.log('does not match');
+        
+        }
+        setTimeout(function(){    
+        funcRemove(prevCard, evtObj);
+        }, 1000);
+        turnCheck = 0;
+        cardChecker = '';
+        prevCard = '';
+        moves++;
+        moveElem.innerHTML = moves;
+        return;
+     }
+     prevCard = evtObj.target;
+     cardChecker = evtObj.target.innerHTML;
+     turnCheck++;
+ }
+
+ let funcShow = function(evtObj){
+    evtObj.target.classList.add('open');
+    evtObj.target.classList.add('show');
+ }
+
+const cardDeck = document.querySelectorAll('.card');
+ for(var i=0;i<cardDeck.length;i++){
+     cardDeck[i].addEventListener('click', funcShow);
+     cardDeck[i].addEventListener('click', matchCheck);
+     
+    }
+
+let funcRemove = function (p1,p2){
+        p1.classList.remove('open');
+        p1.classList.remove('show');    
+        p2.target.classList.remove('open');
+        p2.target.classList.remove('show');
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -59,6 +106,8 @@ function shuffle(array) {
  // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  // */
 
-// const cardDeck = document.querySelector('.deck');
-// cardDeck.addEventListener('click', )
 
+
+
+
+ 
