@@ -38,18 +38,17 @@ let moves = 3;
 
 let matchCheck = function(evtObj){
   console.log(turnCheck);
-     if(turnCheck==1){
+     if(turnCheck===1){
+        setTimeout(function(){}, 1000);
         if(evtObj.target.innerHTML===cardChecker){
             evtObj.target.classList.add('match');
             prevCard.classList.add('match');
         }
         else{
-            console.log('does not match');
-        
+
+            alert('No match!');
         }
-        setTimeout(function(){    
         funcRemove(prevCard, evtObj);
-        }, 1000);
         turnCheck = 0;
         cardChecker = '';
         prevCard = '';
@@ -75,6 +74,7 @@ const cardDeck = document.querySelectorAll('.card');
     }
 
 let funcRemove = function (p1,p2){
+        
         p1.classList.remove('open');
         p1.classList.remove('show');    
         p2.target.classList.remove('open');
@@ -105,6 +105,11 @@ function shuffle(array) {
  // *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  // *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  // */
+
+// Reload the page
+
+const reloadBtn = document.querySelector('.fa-repeat');
+reloadBtn.addEventListener('click', function(){location.reload();});
 
 
 
