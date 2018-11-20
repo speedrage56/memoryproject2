@@ -37,6 +37,7 @@ let prevCard = '';
 let moves = 3;
 
 let matchCheck = function(evtObj){
+  funcShow(evtObj);  
   console.log(turnCheck);
      if(turnCheck===1){
         setTimeout(function(){}, 1000);
@@ -46,7 +47,7 @@ let matchCheck = function(evtObj){
         }
         else{
 
-            alert('No match!');
+            alert('No match');
         }
         funcRemove(prevCard, evtObj);
         turnCheck = 0;
@@ -61,24 +62,21 @@ let matchCheck = function(evtObj){
      turnCheck++;
  }
 
- let funcShow = function(evtObj){
-    evtObj.target.classList.add('open');
-    evtObj.target.classList.add('show');
+ let funcShow = function(e){
+    e.target.classList.add('open', 'show');
+    console.log('funcShow');
  }
 
 const cardDeck = document.querySelectorAll('.card');
  for(var i=0;i<cardDeck.length;i++){
-     cardDeck[i].addEventListener('click', funcShow);
      cardDeck[i].addEventListener('click', matchCheck);
-     
     }
 
 let funcRemove = function (p1,p2){
-        
-        p1.classList.remove('open');
-        p1.classList.remove('show');    
-        p2.target.classList.remove('open');
-        p2.target.classList.remove('show');
+
+        setTimeout(function(){}, 1000);    
+        p1.classList.remove('open', 'show');
+        p2.target.classList.remove('open', 'show');
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
